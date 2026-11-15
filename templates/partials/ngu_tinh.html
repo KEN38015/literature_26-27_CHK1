@@ -1,0 +1,134 @@
+<section class="panel">
+  <h2>{{ sec.icon }} {{ sec.title }}</h2>
+  <p class="lead">{{ sec.desc }}</p>
+
+  <h3 class="sub-title">Tả cảnh ngụ tình là gì?</h3>
+  <div class="author-intro concept">
+    <div class="info-card">
+      <div class="info-name">Cảnh → Tình</div>
+      <div class="info-years">Mượn cảnh để nói tình</div>
+      <dl>
+        <dt>Cảnh</dt><dd>Là phương tiện: thiên nhiên, không gian, thời gian</dd>
+        <dt>Tình</dt><dd>Là mục đích: tâm trạng, cảm xúc của nhân vật</dd>
+      </dl>
+    </div>
+    <div class="author-text">
+      <p>
+        <strong>Tả cảnh ngụ tình</strong> là bút pháp miêu tả thiên nhiên để gửi gắm, bộc lộ tâm trạng con người.
+        Cảnh vật không được tả một cách khách quan mà được nhìn qua đôi mắt và tâm trạng của nhân vật: người buồn thì
+        cảnh buồn, người cô đơn thì cảnh hoang vắng. Đây là bút pháp quen thuộc của thơ ca cổ điển, và Nguyễn Du đã
+        đưa nó lên đến đỉnh cao trong <em>Truyện Kiều</em>.
+      </p>
+      <p>Chính Nguyễn Du đã đúc kết quan niệm ấy trong hai câu thơ nổi tiếng:</p>
+      <blockquote>
+        <mark>Cảnh nào cảnh chẳng đeo sầu,</mark><br>
+        <mark>Người buồn, cảnh có vui đâu bao giờ!</mark>
+      </blockquote>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Cách Nguyễn Du "ngụ tình" vào cảnh</h3>
+  <div class="two-col">
+    <div class="card">
+      <h4>Chọn cảnh tương hợp với tâm trạng</h4>
+      <p>Cảnh chiều hôm, cửa bể, nội cỏ, rừng phong thu, vườn hoang... đều là những cảnh gợi buồn, gợi xa cách, phù hợp với tâm trạng nhân vật lúc ấy.</p>
+    </div>
+    <div class="card">
+      <h4>Cảnh nhìn qua lăng kính nhân vật</h4>
+      <p>Cùng là trăng, hoa, gió, tuyết, nhưng với Kiều ở lầu xanh tất cả đều "đeo sầu". Cảnh mang màu sắc chủ quan của người ngắm cảnh.</p>
+    </div>
+    <div class="card">
+      <h4>Cảnh vận động theo dòng cảm xúc</h4>
+      <p>Cảnh chuyển từ xa đến gần, từ nhạt đến đậm, từ tĩnh đến động, song song với nỗi buồn tăng dần trong lòng nhân vật.</p>
+    </div>
+    <div class="card">
+      <h4>Ngôn ngữ đậm chất trữ tình</h4>
+      <p>Điệp ngữ ("buồn trông"), từ láy ("man mác", "dàu dàu", "quạnh quẽ"), câu hỏi tu từ và hình ảnh ẩn dụ giúp cảnh "nói" thay cho tình.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">📌 Những đoạn tả cảnh ngụ tình đặc sắc nhất</h3>
+  <div class="pinned-list">
+    {% for s in nt_featured %}
+    <a class="pinned" href="#nt-{{ s.id }}">
+      <span class="pin-icon">📌</span>
+      <span class="pin-label">{{ s.label }}</span>
+      <strong class="pin-title">{{ s.title }}</strong>
+      <span class="pin-quote">{{ s.verses_html[-2] }}<br>{{ s.verses_html[-1] }}</span>
+      <span class="pin-why">{{ s.why }}</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <h3 class="sub-title">Trọng tâm: tám câu "Buồn trông"</h3>
+  <p>
+    Tám câu cuối đoạn <em>Kiều ở lầu Ngưng Bích</em> được xem là mẫu mực của bút pháp tả cảnh ngụ tình. Mỗi cặp câu là
+    một bức tranh, và mỗi bức tranh là một nỗi buồn khác nhau của Kiều:
+  </p>
+  <div class="table-wrap">
+    <table class="canh-tinh-table">
+      <thead><tr><th>#</th><th>Cảnh</th><th>Tình (tâm trạng của Kiều)</th></tr></thead>
+      <tbody>
+        {% for canh, tinh in buon_trong_table %}
+        <tr><td>{{ loop.index }}</td><td>{{ canh }}</td><td>{{ tinh }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="hint">Cảnh đi từ xa đến gần, màu sắc từ nhạt đến đậm, âm thanh từ tĩnh đến động; nỗi buồn cũng theo đó dâng lên thành nỗi lo sợ.</p>
+
+  <div class="scene-toolbar">
+    <h3 class="sub-title">Toàn bộ các đoạn tả cảnh ngụ tình <span class="tag">{{ nt_scenes|length }} đoạn</span></h3>
+    <label class="toggle">
+      <input type="checkbox" onchange="document.getElementById('nt-scenes').classList.toggle('only-featured', this.checked)">
+      Chỉ hiện đoạn đặc sắc
+    </label>
+  </div>
+  <p class="hint">Mỗi đoạn có phần <span class="chip chip-canh">Cảnh</span> (trích thơ, từ ngữ <mark>tô vàng</mark>) và phần <span class="chip chip-tinh">Tình</span> (tâm trạng được gửi gắm).</p>
+
+  <div id="nt-scenes">
+    {% for code, part_title in parts %}
+    {% set items = nt_scenes | selectattr("part", "equalto", code) | list %}
+    {% if items %}
+    <div class="part-group">
+      <h4 class="part-group-title">{{ part_title }}</h4>
+      <div class="scene-list">
+        {% for s in items %}
+        <article class="scene {% if s.featured %}featured{% endif %}" id="nt-{{ s.id }}">
+          <header>
+            <span class="part-no">{{ s.label }}</span>
+            <h4>{{ s.title }}</h4>
+            {% if s.featured %}<span class="star-badge">★ Đặc sắc</span>{% endif %}
+          </header>
+          <p class="scene-context">{{ s.context }}</p>
+          <div class="canh-block">
+            <span class="chip chip-canh">Cảnh</span>
+            <blockquote>
+              {% for line in s.verses_html %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+            </blockquote>
+          </div>
+          <div class="tinh-block">
+            <span class="chip chip-tinh">Tình · {{ s.who }}</span>
+            <p>{{ s.tinh }}</p>
+          </div>
+          <ul>
+            {% for n in s.notes %}<li>{{ n }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="takeaway">
+    <h3>Tổng kết</h3>
+    <p>
+      Với bút pháp tả cảnh ngụ tình, thiên nhiên trong <em>Truyện Kiều</em> không chỉ là bức phông nền mà trở thành
+      tấm gương phản chiếu tâm hồn nhân vật. Mỗi cảnh vật đều thấm đẫm cảm xúc: khi bâng khuâng, khi cô đơn, khi lưu luyến,
+      khi đau đớn. Nhờ đó, Nguyễn Du đã diễn tả thế giới nội tâm phức tạp của con người một cách tinh tế, sâu sắc,
+      khiến người đọc cảm thông sâu sắc với số phận của Thuý Kiều.
+    </p>
+  </div>
+</section>

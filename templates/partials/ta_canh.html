@@ -1,0 +1,90 @@
+<section class="panel">
+  <h2>{{ sec.icon }} {{ sec.title }}</h2>
+  <p class="lead">{{ sec.desc }}</p>
+
+  <p>
+    Nguyễn Du là bậc thầy trong nghệ thuật miêu tả thiên nhiên. Chỉ bằng vài nét chấm phá, ông đã vẽ nên những bức
+    tranh vừa cụ thể, sống động, vừa mang vẻ đẹp cổ điển, trang nhã. Cảnh trong <em>Truyện Kiều</em> không bao giờ là
+    cảnh "chết": nó luôn vận động theo thời gian, theo bước chân và cái nhìn của nhân vật.
+  </p>
+
+  <h3 class="sub-title">Đặc điểm nghệ thuật</h3>
+  <div class="two-col">
+    <div class="card">
+      <h4>Bút pháp ước lệ, chấm phá</h4>
+      <p>Không tả tỉ mỉ mà chọn lọc vài hình ảnh tiêu biểu (cỏ non, cành lê, trăng, non xa...) để gợi ra cả một không gian. Lối viết "gợi nhiều hơn tả" của thơ ca cổ điển phương Đông.</p>
+    </div>
+    <div class="card">
+      <h4>Màu sắc và đường nét hài hoà</h4>
+      <p>Phối màu tinh tế: xanh của cỏ, trắng của hoa lê, vàng của ánh trăng, đỏ của lửa lựu. Không gian được mở ra theo chiều rộng, chiều xa ("tận chân trời", "bốn bề bát ngát").</p>
+    </div>
+    <div class="card">
+      <h4>Ngôn ngữ giàu sức gợi</h4>
+      <p>Dùng chính xác động từ, tính từ và từ láy ("tà tà", "thơ thẩn", "nao nao", "nho nhỏ", "lập loè") khiến cảnh vật có hồn, có nhịp điệu.</p>
+    </div>
+    <div class="card">
+      <h4>Cảnh vận động theo thời gian</h4>
+      <p>Cảnh thay đổi theo mùa, theo buổi trong ngày: từ ngày xuân tươi tắn, lễ hội rộn ràng đến đêm trăng huyền ảo, mùa hè rực rỡ. Qua đó người đọc cảm nhận được bước đi của thời gian trong câu chuyện.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">📌 Những đoạn tả cảnh đặc sắc nhất</h3>
+  <div class="pinned-list">
+    {% for s in featured %}
+    <a class="pinned" href="#scene-{{ s.id }}">
+      <span class="pin-icon">📌</span>
+      <span class="pin-label">{{ s.label }}</span>
+      <strong class="pin-title">{{ s.title }}</strong>
+      <span class="pin-quote">{{ s.verses_html[-2] }}<br>{{ s.verses_html[-1] }}</span>
+      <span class="pin-why">{{ s.why }}</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="scene-toolbar">
+    <h3 class="sub-title">Toàn bộ các đoạn tả cảnh <span class="tag">{{ scenes|length }} đoạn</span></h3>
+    <label class="toggle">
+      <input type="checkbox" onchange="document.getElementById('all-scenes').classList.toggle('only-featured', this.checked)">
+      Chỉ hiện đoạn đặc sắc
+    </label>
+  </div>
+  <p class="hint">Các đoạn được sắp theo trình tự câu chuyện. Từ ngữ <mark>tô vàng</mark> là những chỗ đáng chú ý khi phân tích; đoạn có viền đỏ và nhãn ★ là đoạn đặc sắc. Các đoạn tả cảnh ngụ tình (cảnh gắn với tâm trạng nhân vật) được trình bày riêng ở mục 🌸 Nghệ thuật tả cảnh ngụ tình.</p>
+
+  <div id="all-scenes">
+    {% for code, part_title in parts %}
+    {% set items = scenes | selectattr("part", "equalto", code) | list %}
+    {% if items %}
+    <div class="part-group">
+      <h4 class="part-group-title">{{ part_title }}</h4>
+      <div class="scene-list">
+        {% for s in items %}
+        <article class="scene {% if s.featured %}featured{% endif %}" id="scene-{{ s.id }}">
+          <header>
+            <span class="part-no">{{ s.label }}</span>
+            <h4>{{ s.title }}</h4>
+            {% if s.featured %}<span class="star-badge">★ Đặc sắc</span>{% endif %}
+          </header>
+          <p class="scene-context">{{ s.context }}</p>
+          <blockquote>
+            {% for line in s.verses_html %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+          </blockquote>
+          <ul>
+            {% for n in s.notes %}<li>{{ n }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="takeaway">
+    <h3>Tổng kết</h3>
+    <p>
+      Bằng bút pháp ước lệ kết hợp với ngôn ngữ tinh tế, giàu màu sắc và nhạc điệu, Nguyễn Du đã tạo nên những bức
+      tranh thiên nhiên tuyệt đẹp, vừa mang vẻ cổ điển vừa gần gũi với cảnh sắc Việt Nam. Thiên nhiên trong
+      <em>Truyện Kiều</em> luôn sống động, có hồn, đổi thay theo mùa, theo buổi trong ngày và theo bước đi của câu chuyện.
+    </p>
+  </div>
+</section>

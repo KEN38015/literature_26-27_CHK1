@@ -1,0 +1,42 @@
+{% if mode == "search" %}
+<div class="verse-search-head">
+  <span>Tìm thấy <strong>{{ count }}</strong> câu có "<em>{{ q }}</em>"{% if count > verses|length %} (hiện {{ verses|length }} câu đầu){% endif %}</span>
+  <button class="step-btn" hx-get="/dich-nghia/trang/1" hx-target="#verse-panel" onclick="document.querySelector('.verse-tools input[type=search]').value=''">✕ Xoá tìm kiếm</button>
+</div>
+{% else %}
+<div class="pager">
+  <button class="step-btn" {% if page <= 1 %}disabled{% endif %} hx-get="/dich-nghia/trang/{{ page - 1 }}" hx-target="#verse-panel">←</button>
+  <select aria-label="Chọn trang" hx-get="/dich-nghia/trang/0" hx-target="#verse-panel"
+          onchange="htmx.ajax('GET','/dich-nghia/trang/'+this.value,'#verse-panel')" hx-trigger="none">
+    {% for p in range(1, page_count + 1) %}
+    {% set a = (p - 1) * page_size + 1 %}{% set b = [p * page_size, total_lines]|min %}
+    <option value="{{ p }}" {% if p == page %}selected{% endif %}>Câu {{ a }}–{{ b }}</option>
+    {% endfor %}
+  </select>
+  <button class="step-btn" {% if page >= page_count %}disabled{% endif %} hx-get="/dich-nghia/trang/{{ page + 1 }}" hx-target="#verse-panel">→</button>
+</div>
+{% endif %}
+
+<ol class="verse-list">
+  {% for v in verses %}
+  {% if mode != "search" and v.excerpt and v.excerpt[1] == v.id %}
+  <li class="verse-group">📖 {{ v.excerpt[0] }} (câu {{ v.excerpt[1] }}–{{ v.excerpt[2] }})</li>
+  {% endif %}
+  <li>
+    <button class="verse {% if v.meaning or v.couplet_meaning %}has-note{% endif %} {% if v.kind == 'bát' %}bat{% endif %} {% if focus == v.id %}selected{% endif %}"
+            data-verse-id="{{ v.id }}" id="v-{{ v.id }}"
+            hx-get="/phan-tich/{{ v.id }}" hx-target="#analysis-box" hx-swap="innerHTML">
+      <span class="verse-no">{{ v.id }}</span>{{ v.text }}
+    </button>
+  </li>
+  {% else %}
+  <li class="hint">Không tìm thấy câu nào.</li>
+  {% endfor %}
+</ol>
+
+{% if focus %}
+<div hx-get="/phan-tich/{{ focus }}" hx-target="#analysis-box" hx-trigger="load"></div>
+<script>
+  (function () { var el = document.getElementById('v-{{ focus }}'); if (el) el.scrollIntoView({block: 'center'}); })();
+</script>
+{% endif %}

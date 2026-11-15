@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block body %}
+<header class="site-header">
+  <a href="/" class="brand">
+    <h1>TẤT CẢ VỀ TRUYỆN KIỀU</h1>
+    <p class="subtitle">Đoạn trường tân thanh — Nguyễn Du</p>
+  </a>
+</header>
+
+<nav class="main-nav" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">
+  {% for slug, s in sections.items() %}
+  <button class="nav-btn {% if active == slug %}active{% endif %}"
+          hx-get="/muc/{{ slug }}"
+          onclick="document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">
+    <span class="nav-icon">{{ s.icon }}</span>
+    <span>{{ s.title }}</span>
+  </button>
+  {% endfor %}
+</nav>
+
+<main id="content" class="content">
+  {% if sec %}
+    {% include sec.template %}
+  {% else %}
+    <section class="welcome">
+      <h2>Chào mừng bạn!</h2>
+      <p>Chọn một mục ở trên để bắt đầu tìm hiểu kiệt tác <em>Truyện Kiều</em>.</p>
+      <blockquote>
+        Trăm năm trong cõi người ta,<br>
+        Chữ tài chữ mệnh khéo là ghét nhau.
+      </blockquote>
+    </section>
+  {% endif %}
+</main>
+
+<script>
+  // Đồng bộ nút đang chọn trên thanh điều hướng với URL hiện tại.
+  function syncNav() {
+    document.querySelectorAll('.nav-btn').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('hx-get') === location.pathname);
+    });
+  }
+  document.body.addEventListener('htmx:pushedIntoHistory', syncNav);
+  window.addEventListener('popstate', syncNav);
+</script>
+
+<footer class="site-footer">Bài tập lớn môn Ngữ văn</footer>
+{% endblock %}

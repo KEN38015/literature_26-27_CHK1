@@ -1,0 +1,21 @@
+<div data-current="{{ verse.id }}" data-page="1">
+  <p class="analysis-group">
+    Câu {{ verse.kind }}{% if verse.excerpt %} · Đoạn trích "{{ verse.excerpt[0] }}"{% endif %}
+  </p>
+  <h3>Câu {{ verse.id }}</h3>
+  <blockquote>
+    {% for p in pair_lines %}{% if p.id == verse.id %}<mark>{{ p.text }}</mark>{% else %}<span class="pair-line">{{ p.text }}</span>{% endif %}{% if not loop.last %}<br>{% endif %}{% endfor %}
+  </blockquote>
+  <h4>Dịch nghĩa</h4>
+  {% if verse.couplet_meaning %}<p><span class="tag">Cả cặp câu {{ verse.pair[0] }}–{{ verse.pair[1] }}</span><br>{{ verse.couplet_meaning }}</p>{% endif %}
+  {% if verse.meaning %}<p><span class="tag">Riêng câu {{ verse.id }}</span><br>{{ verse.meaning }}</p>{% endif %}
+  {% if not verse.meaning and not verse.couplet_meaning %}<p class="hint">Đang cập nhật…</p>{% endif %}
+  <h4>Phân tích</h4>
+  {% if verse.analysis %}<p><span class="tag">Riêng câu {{ verse.id }}</span><br>{{ verse.analysis }}</p>{% endif %}
+  {% if verse.couplet_analysis %}<p><span class="tag">Cả cặp câu {{ verse.pair[0] }}–{{ verse.pair[1] }}</span><br>{{ verse.couplet_analysis }}</p>{% endif %}
+  {% if not verse.analysis and not verse.couplet_analysis %}<p class="hint">Đang cập nhật…</p>{% endif %}
+  <div class="analysis-nav">
+    {% if prev_id %}<button class="step-btn" hx-get="/phan-tich/{{ prev_id }}" hx-target="#analysis-box">← Câu {{ prev_id }}</button>{% else %}<span></span>{% endif %}
+    {% if next_id %}<button class="step-btn" hx-get="/phan-tich/{{ next_id }}" hx-target="#analysis-box">Câu {{ next_id }} →</button>{% endif %}
+  </div>
+</div>

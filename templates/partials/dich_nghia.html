@@ -1,0 +1,48 @@
+<section class="panel">
+  <h2>{{ sec.icon }} {{ sec.title }}</h2>
+  <p class="lead">{{ sec.desc }}</p>
+  <p class="hint">Toàn bộ {{ "{:,}".format(total_lines).replace(",", ".") }} câu nguyên văn. Câu có dấu <span class="dot-note"></span> đã có dịch nghĩa và phân tích; các câu khác đang được cập nhật dần.</p>
+
+  <div class="verse-tools">
+    <form class="tool" hx-get="/dich-nghia/tim" hx-target="#verse-panel" hx-trigger="submit, input changed delay:400ms from:find input">
+      <input type="search" name="q" placeholder="🔍 Tìm câu thơ (gõ có dấu hoặc không dấu)…" aria-label="Tìm câu thơ">
+    </form>
+    <form class="tool jump" onsubmit="event.preventDefault(); var n=this.n.value; if(n) htmx.ajax('GET','/dich-nghia/cau/'+n,'#verse-panel');">
+      <input type="number" name="n" min="1" max="{{ total_lines }}" placeholder="Số câu" aria-label="Nhảy tới câu số">
+      <button class="step-btn" type="submit">Đến câu</button>
+    </form>
+  </div>
+
+  <div class="excerpt-chips">
+    <span class="chips-label">Đoạn trích:</span>
+    {% for name, a, b in excerpts %}
+    <button class="chip-btn" hx-get="/dich-nghia/cau/{{ a }}" hx-target="#verse-panel">{{ name }} <small>{{ a }}–{{ b }}</small></button>
+    {% endfor %}
+  </div>
+
+  <div class="translate-layout">
+    <div id="verse-panel">
+      {% include "partials/verse_panel.html" %}
+    </div>
+    <aside id="analysis-box" class="analysis-box">
+      <p class="hint">👈 Bấm vào một câu thơ để xem dịch nghĩa và phân tích.</p>
+    </aside>
+  </div>
+</section>
+<script>
+  // Tô sáng câu đang được phân tích (kể cả khi bấm "câu trước / câu sau").
+  document.getElementById('analysis-box').addEventListener('htmx:afterSwap', function (e) {
+    var cur = e.target.querySelector('[data-current]');
+    if (!cur) return;
+    var id = cur.dataset.current, found = null;
+    document.querySelectorAll('.verse').forEach(function (b) {
+      var on = b.dataset.verseId === id;
+      b.classList.toggle('selected', on);
+      if (on) found = b;
+    });
+    // Câu sau/trước nằm ở trang khác thì chuyển trang.
+    if (!found && cur.dataset.page && !document.querySelector('.verse-search-head')) {
+      htmx.ajax('GET', '/dich-nghia/cau/' + id + '?no_load=1', '#verse-panel');
+    }
+  });
+</script>
