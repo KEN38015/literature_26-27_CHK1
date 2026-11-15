@@ -41,6 +41,16 @@ Máy cần cài **Python 3.10 trở lên**. Có thể tải tại https://www.py
    ```
 4. Mở trình duyệt và vào **http://localhost:8000**. Nhấn `Ctrl + C` trong Terminal để tắt.
 
+## Đưa lên mạng (Render)
+
+Repo đã có sẵn file `render.yaml`. Các bước:
+
+1. Vào https://render.com, đăng nhập bằng tài khoản GitHub.
+2. Chọn **New → Blueprint**, rồi chọn repo `literature_26-27_CHK1`.
+3. Bấm **Apply**. Render sẽ tự cài thư viện và chạy web, sau đó cấp link dạng `https://truyen-kieu-xxxx.onrender.com`.
+
+Mỗi lần push code mới lên nhánh `main`, Render sẽ tự triển khai lại. Ở gói miễn phí, nếu một lúc lâu không có ai truy cập, lần mở đầu tiên sau đó sẽ mất khoảng 30–50 giây.
+
 ## Cấu trúc thư mục
 
 | Đường dẫn | Nội dung |
