@@ -20,7 +20,7 @@
 <ol class="verse-list">
   {% for v in verses %}
   {% if mode != "search" and v.excerpt and v.excerpt[1] == v.id %}
-  <li class="verse-group">📖 {{ v.excerpt[0] }} (câu {{ v.excerpt[1] }}–{{ v.excerpt[2] }})</li>
+  <li class="verse-group">{{ v.excerpt[0] }} (câu {{ v.excerpt[1] }}–{{ v.excerpt[2] }})</li>
   {% endif %}
   <li>
     <button class="verse {% if v.meaning or v.couplet_meaning %}has-note{% endif %} {% if v.kind == 'bát' %}bat{% endif %} {% if focus == v.id %}selected{% endif %}"

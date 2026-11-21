@@ -12,7 +12,6 @@
   <button class="nav-btn {% if active == slug %}active{% endif %}"
           hx-get="/muc/{{ slug }}"
           onclick="document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">
-    <span class="nav-icon">{{ s.icon }}</span>
     <span>{{ s.title }}</span>
   </button>
   {% endfor %}

@@ -308,7 +308,6 @@ mark { background: #fbe7a1; color: inherit; padding: 0 .15em; border-radius: 3px
   transition: transform .15s, box-shadow .15s;
 }
 .pinned:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.pin-icon { position: absolute; top: .6rem; right: .8rem; font-size: 1.1rem; }
 .pin-label { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 .pin-title { font-family: "Noto Serif", serif; font-size: 1.05rem; color: var(--accent); padding-right: 1.5rem; }
 .pin-quote { font-family: "Noto Serif", serif; font-style: italic; }

@@ -20,43 +20,36 @@ templates = Jinja2Templates(directory=BASE_DIR / "templates")
 SECTIONS = {
     "dich-nghia": {
         "title": "Dịch nghĩa Truyện Kiều",
-        "icon": "📜",
         "template": "partials/dich_nghia.html",
         "desc": "Đọc từng câu thơ — bấm vào một câu để xem phân tích chi tiết.",
     },
     "tom-tat": {
         "title": "Tóm tắt cốt truyện",
-        "icon": "📖",
         "template": "partials/tom_tat.html",
         "desc": "Tóm tắt ba phần: Gặp gỡ và đính ước — Gia biến và lưu lạc — Đoàn tụ.",
     },
     "tac-gia": {
         "title": "Giới thiệu tác giả",
-        "icon": "🖋️",
         "template": "partials/tac_gia.html",
         "desc": "Cuộc đời, thời đại và sự nghiệp sáng tác của Nguyễn Du.",
     },
     "tam-trang": {
         "title": "Tâm trạng Thuý Kiều & Kim Trọng",
-        "icon": "💭",
         "template": "partials/tam_trang.html",
         "desc": "Diễn biến nội tâm của hai nhân vật qua các đoạn trích tiêu biểu.",
     },
     "chan-dung": {
         "title": "Nghệ thuật miêu tả chân dung",
-        "icon": "🎭",
         "template": "partials/chan_dung.html",
         "desc": "Bút pháp ước lệ khắc hoạ chân dung Thuý Vân, Thuý Kiều, Kim Trọng, Hoạn Thư, Tú Bà...",
     },
     "nghe-thuat-ta-canh": {
         "title": "Nghệ thuật tả cảnh",
-        "icon": "🏞️",
         "template": "partials/ta_canh.html",
         "desc": "Những bức tranh thiên nhiên thuần tả cảnh trong Truyện Kiều: cảnh ngày xuân, lễ hội, đêm trăng, mùa hè...",
     },
     "ta-canh": {
         "title": "Nghệ thuật tả cảnh ngụ tình",
-        "icon": "🌸",
         "template": "partials/ngu_tinh.html",
         "desc": "Cảnh vật nhuốm màu tâm trạng — tiêu biểu là đoạn Kiều ở lầu Ngưng Bích.",
     },

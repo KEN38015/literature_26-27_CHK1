@@ -1,5 +1,5 @@
 <section class="panel">
-  <h2>{{ sec.icon }} {{ sec.title }}</h2>
+  <h2>{{ sec.title }}</h2>
   <p class="lead">{{ sec.desc }}</p>
 
   <p>
@@ -28,11 +28,10 @@
     </div>
   </div>
 
-  <h3 class="sub-title">📌 Những đoạn tả cảnh đặc sắc nhất</h3>
+  <h3 class="sub-title">Những đoạn tả cảnh đặc sắc nhất</h3>
   <div class="pinned-list">
     {% for s in featured %}
     <a class="pinned" href="#scene-{{ s.id }}">
-      <span class="pin-icon">📌</span>
       <span class="pin-label">{{ s.label }}</span>
       <strong class="pin-title">{{ s.title }}</strong>
       <span class="pin-quote">{{ s.verses_html[-2] }}<br>{{ s.verses_html[-1] }}</span>
